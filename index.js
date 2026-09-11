@@ -264,3 +264,24 @@ SYHaTe_WSS.on("connection", (S7HaTe_CS) => {
 SYHaTe_WSS.on("listening", () => {
     log("success", "WEBSOCKET", `S7 Relay server listening on port ${S7_PORT}`);
 });
+
+if (process.env.URL) {
+
+    (async () => {
+        try {
+            const res = await fetch(process.env.URL);
+            log('info', 'PING', `Pinged: ${process.env.URL} | Status: ${res.status}`);
+        } catch (err) {
+            log('error', 'PING', err.message);
+        }
+    })();
+
+    setInterval(async () => {
+        try {
+            const res = await fetch(process.env.URL);
+            log('info', 'PING', `Pinged: ${process.env.URL} | Status: ${res.status}`);
+        } catch (err) {
+            log('error', 'PING', err.message);
+        }
+    }, 5 * 60 * 1000);
+}
