@@ -125,13 +125,11 @@ function SABIR7718_GET_SERVER_STATUS() {
             key: SYHaTeServerName,
             connected: SYHaTeConnected,
             readyState: SYHaTeServerSocket ?
-                SYHaTeServerSocket.readyState :
-                null,
+                SYHaTeServerSocket.readyState : null,
             connectedAt: SYHaTeServerData.connectedAt,
             uptime: SYHaTeServerData.connectedAt ?
                 Date.now() -
-                SYHaTeServerData.connectedAt :
-                null
+                SYHaTeServerData.connectedAt : null
         });
     }
 
@@ -410,15 +408,10 @@ SYHaTe_WSS.on(
 
                         SABIR7718_NOTIFY_CLIENTS(
                             SABIR7718_SERVER_NAME, {
+                                ...S7_REQUEST,
                                 type: "response",
-                                id: S7_RESPONSE_ID,
                                 server: SABIR7718_SERVER_NAME,
-                                success: S7_REQUEST.success,
-                                event: S7_REQUEST.event,
-                                number: S7_REQUEST.number,
-                                code: S7_REQUEST.code,
-                                result: S7_REQUEST.result,
-                                error: S7_REQUEST.error
+                                Developer: "SABIR7718"
                             }
                         );
                     }
