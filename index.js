@@ -310,8 +310,18 @@ SYHaTe_WSS.on(
                             S7_REQUEST.method ===
                             "servers"
                         ) {
+                            for (
+                                const SYHaTeServerName of SABIR7718_SERVERS.keys()
+                            ) {
+                                S7_SUBSCRIBE_CLIENT(
+                                    S7HaTe_CS,
+                                    SYHaTeServerName
+                                );
+                            }
+
                             return SYHaTeS7_SEND(
                                 S7HaTe_CS, {
+                                    id: S7_REQUEST.id,
                                     success: true,
                                     event: "serverStatus",
                                     ...SABIR7718_GET_SERVER_STATUS()
